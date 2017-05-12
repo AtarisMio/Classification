@@ -1,0 +1,33 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Java",
+            "type": "java",
+            "request": "launch",
+            "jdkPath": "/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/bin",
+            "stopOnEntry": true,
+            "cwd": "${workspaceRoot}",
+            "startupClass": "Entrance",
+            "options": [
+                "-classpath",
+                "${workspaceRoot}"
+            ]
+        },
+        {
+            "name": "Java Console App",
+            "type": "java",
+            "request": "launch",
+            "jdkPath": "/Library/Java/JavaVirtualMachines/jdk1.8.0_121.jdk/Contents/Home/bin",
+            "stopOnEntry": true,
+            "cwd": "${fileDirname}",
+            "startupClass": "${fileBasename}",
+            "preLaunchTask": "build",
+            "options": [
+                "-classpath",
+                "\"${fileDirname};.\""
+            ],
+            "externalConsole": true
+        }
+    ]
+}
