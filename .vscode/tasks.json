@@ -1,16 +1,21 @@
 {
-    // See https://go.microsoft.com/fwlink/?LinkId=733558
-    // for the documentation about the tasks.json format
     "version": "0.1.0",
-    "command": "javac",
     "isShellCommand": true,
-    "isBackground": true,
     "showOutput": "always",
-    "suppressTaskName": true,
     "tasks": [
         {
             "taskName": "build",
-            "args": ["-g", "${file}"]
+            "command": "javac",
+            "isBuildCommand": true,
+            "args": ["-g","-verbose","-d","bin","${file}"], //不能写成"-d bin"
+            "suppressTaskName": true
+        },
+        {
+            "taskName": "java",
+            "command": "java",
+            "isBuildCommand": true,
+            "args": ["-cp","bin","${fileBasenameNoExtension}"], 
+            "suppressTaskName": true
         }
     ]
 }

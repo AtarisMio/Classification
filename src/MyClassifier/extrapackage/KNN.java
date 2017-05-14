@@ -1,10 +1,10 @@
-package src.extrapackage;
+package MyClassifier.extrapackage;
 
-import src.extrapackage.Data;
 import java.util.ArrayList;
 import java.util.List;
+
 /**
- * KNN
+ * Created by Ataris on 2017/5/14.
  */
 public class KNN {
     private static final KNN instance = new KNN();
@@ -41,13 +41,16 @@ public class KNN {
 
     private static Data pending = null;
     private static Double wrost = Double.MAX_VALUE;
+    public static Data getPending () {
+        return KNN.pending;
+    }
     public static void setPendingData(Data o) {
         KNN.pending = o;
     }
 
     private void calculateEveryDistance(Data o) {
         KNN.setPendingData(o);
-        this.dataSets.stream().map(Data.calculateDistanceWithPending);
+        this.dataSets.stream().map(d1 -> Data.calculateDistanceWithPending(d1));
         this.dataSets.sort((d1,d2) -> d1.compareTo(d2));
     }
 

@@ -1,13 +1,10 @@
-package src.extrapackage;
+package MyClassifier.extrapackage;
 
-import java.util.List;
-import java.util.stream.Stream;
 import java.util.ArrayList;
-import java.util.Arrays;
-import src.extrapackage.Diabetes;
+import java.util.List;
 
 /**
- * Data
+ * Created by Ataris on 2017/5/14.
  */
 public class Data implements Comparable<Data> {
     private String originData = "";
@@ -36,7 +33,11 @@ public class Data implements Comparable<Data> {
     public Data(String originData, Boolean isTrainData) {
         this.originData = originData;
         this.isTrainData = isTrainData;
-        parseData(this.originData);
+        try {
+            parseData(this.originData);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void parseData(String origin) throws Exception {
@@ -60,24 +61,25 @@ public class Data implements Comparable<Data> {
                 }
             }
         }
-        
+
     }
 
     public void calculateDistance(Data o) {
         List<Double> dataSet = this.data;
-        Double distance = 0;
+        Double distance = 0.0;
         for(int i=0, size = dataSet.size(); i < size; i++) {
-            distance += (dataSet[i] - o.getData()[i])^2;
+            distance += (dataSet.get(i) - o.getData().get(i))*(dataSet.get(i) - o.getData().get(i));
         }
         this.distance = Math.sqrt(distance);
     }
-    public static void calculateDistanceWithPending(Data o) {
-        if (KNN.pending == null) {
+    public static void calculateDistanceWithPending(Data o) throws Exception {
+        if (KNN.getPending() == null) {
             throw new Exception("should set pending data first");
         }
-        Double distance = 0;        
+        Double distance = 0.0;
+        List<Double> dataSet = o.data;
         for(int i=0, size = dataSet.size(); i < size; i++) {
-            distance += (o.getData()[i] - KNN.pending.getData[i])^2;
+            distance += (dataSet.get(i) - KNN.getPending().getData().get(i))*(dataSet.get(i) - KNN.getPending().getData().get(i));
         }
         o.distance = Math.sqrt(distance);
     }
